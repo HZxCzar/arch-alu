@@ -68,6 +68,31 @@ module CLA_32(
 	assign carry = mid2;
 endmodule
 
+module CLA_64(
+	input[63:0]     a,
+	input[63:0]     b,
+	input          cin,
+	output[63:0]    sum,
+	output         carry
+);
+	wire mid1,mid2;
+	CLA_32 cl32_1(
+		.a(a[31:0]),
+		.b(b[31:0]),
+		.cin(cin),
+		.sum(sum[31:0]),
+		.carry(mid1)
+	);
+	CLA_32 cl32_2(
+		.a(a[63:32]),
+		.b(b[63:32]),
+		.cin(mid1),
+		.sum(sum[63:32]),
+		.carry(mid2)
+	);
+	assign carry = mid2;
+endmodule
+
 
 
 module Add(
