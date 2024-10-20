@@ -13,7 +13,7 @@ module Mutiplier(
     generate
         genvar i;
         for(i=0; i<32; i=i+1) begin: unit1_gen
-            assign unit1[i] = y[i] ? x << i : 64'b0;
+            assign unit1[i] = y[i] ? {x,{i{1'b0}}} : 64'b0;
         end
         for(i=0; i<16; i=i+1) begin: unit2_gen
             CLA_64 cl64_1(
