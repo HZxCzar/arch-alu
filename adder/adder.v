@@ -29,6 +29,18 @@ module CLA_4(
     assign sum=p^CI;
 endmodule
 
+module CLA_8(
+	input[7:0]     a,
+    input[7:0]     b,
+    input          cin,
+    output[7:0]    sum,
+    output         carry
+);
+	wire mid1;
+	CLA_4 cla1 (.a(a[3:0]), .b(b[3:0]), .cin(cin), .sum(sum[3:0]), .carry(mid1));
+	CLA_4 cla2 (.a(a[7:4]), .b(b[7:4]), .cin(mid1), .sum(sum[7:4]), .carry(carry));
+endmodule
+
 module CLA_16(
 	input[15:0]     a,
     input[15:0]     b,
